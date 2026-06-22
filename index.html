@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Mundo Encantado dos Gatos 🐾</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9f6f0;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #ffb7b2;
+            color: white;
+            text-align: center;
+            padding: 2.5rem 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .intro {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border-left: 5px solid #ffb7b2;
+        }
+
+        .titulo-secao {
+            text-align: center;
+            color: #e57373;
+            margin: 2rem 0;
+            font-size: 2rem;
+        }
+
+        /* Grid de Raças */
+        .grid-racas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card-gato {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .card-gato:hover {
+            transform: translateY(-5px);
+        }
+
+        .foto-gato {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .conteudo-gato {
+            padding: 1.5rem;
+        }
+
+        .conteudo-gato h3 {
+            color: #ff8a80;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tag-origem {
+            display: inline-block;
+            background-color: #ffe0b2;
+            color: #e65100;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .info-lista {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .info-lista li {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .info-lista strong {
+            color: #555;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 4rem;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>O Mundo Encantado dos Gatos 🐱</h1>
+        <p>Descubra as raças mais fofas, elegantes e fascinantes do universo felino!</p>
+    </header>
+
+    <div class="container">
+        
+        <section class="intro">
+            <h2>Por que amamos tanto os gatos?</h2>
+            <p>Os gatos são companheiros misteriosos, independentes e extremamente carinhosos (do jeito deles!). Domésticos há milhares de anos, eles conquistaram o mundo com seus ronrons terapêuticos, agilidade incrível e, claro, muita fofura. Abaixo, separamos algumas das raças mais famosas do mundo para você conhecer melhor.</p>
+        </section>
+
+        <h2 class="titulo-secao">Conheça as Raças</h2>
+
+        <div class="grid-racas">
+
+            <!-- Gato 1: Persa -->
+            <div class="card-gato">
+                <img src="https://images.unsplash.com/photo-1614963326505-843868e1d83a?auto=format&fit=crop&q=80&w=600" alt="Gato Persa Branco Fofinho" class="foto-gato">
+                <div class="conteudo-gato">
+                    <h3>Persa</h3>
+                    <span class="tag-origem">Origem: Pérsia (Irã)</span>
+                    <p>O Persa é o verdadeiro rei da calmaria. Conhecido por seu focinho achatado e sua pelagem incrivelmente longa e sedosa, é o gato perfeito para quem busca um companheiro tranquilo.</p>
+                    <ul class="info-lista">
+                        <li><strong>Temperamento:</strong> Calmo, doce e silencioso.</li>
+                        <li><strong>Expectativa de vida:</strong> 12 a 15 anos.</li>
+                        <li><strong>Curiosidade:</strong> Eles adoram rotina e não são muito fãs de pular em lugares altos.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Gato 2: Maine Coon -->
+            <div class="card-gato">
+                <img src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?auto=format&fit=crop&q=80&w=600" alt="Gato Maine Coon Lindo" class="foto-gato">
+                <div class="conteudo-gato">
+                    <h3>Maine Coon</h3>
+                    <span class="tag-origem">Origem: Estados Unidos</span>
+                    <p>Conhecido como o "gigante gentil", o Maine Coon é uma das maiores raças de gatos domésticos do mundo. Apesar do tamanho imponente, eles têm o coração do tamanho de um filhote.</p>
+                    <ul class="info-lista">
+                        <li><strong>Temperamento:</strong> Brincalhão, sociável e muito apegado.</li>
+                        <li><strong>Expectativa de vida:</strong> 10 a 13 anos.</li>
+                        <li><strong>Curiosidade:</strong> Ao contrário da maioria dos gatos, muitos Maine Coons *adoram* água!</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Gato 3: Siamês -->
+            <div class="card-gato">
+                <img src="https://images.unsplash.com/photo-1513360309081-36f5e8804245?auto=format&fit=crop&q=80&w=600" alt="Gato Siamês de Olhos Azuis" class="foto-gato">
+                <div class="conteudo-gato">
+                    <h3>Siamês</h3>
+                    <span class="tag-origem">Origem: Tailândia</span>
+                    <p>Com seus olhos azuis cristalinos marcantes e extremidades escuras, o Siamês é uma das raças mais antigas e reconhecíveis do planeta. Eles são extremamente comunicativos.</p>
+                    <ul class="info-lista">
+                        <li><strong>Temperamento:</strong> Extrovertido, tagarela e ciumento.</li>
+                        <li><strong>Expectativa de vida:</strong> 15 a 20 anos.</li>
+                        <li><strong>Curiosidade:</strong> Se você conversar com um Siamês, ele provavelmente vai miar de volta para te "responder".</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Gato 4: Ragdoll -->
+            <div class="card-gato">
+                <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&q=80&w=600" alt="Gato Ragdoll Fofo" class="foto-gato">
+                <div class="conteudo-gato">
+                    <h3>Ragdoll</h3>
+                    <span class="tag-origem">Origem: Estados Unidos</span>
+                    <p>O nome "Ragdoll" significa "boneca de pano". Esse nome foi dado porque essa raça tem a característica única de relaxar completamente os músculos quando é colada no colo.</p>
+                    <ul class="info-lista">
+                        <li><strong>Temperamento:</strong> Extremamente dócil, afetuoso e preguiçoso.</li>
+                        <li><strong>Expectativa de vida:</strong> 12 a 17 anos.</li>
+                        <li><strong>Curiosidade:</strong> Eles são tão mansos que são conhecidos como os "gatos-cachorros", pois seguem os donos pela casa toda.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>Criado com amor para todos os amantes de gatinhos do mundo 🐾</p>
+    </footer>
+
+</body>
+</html>
