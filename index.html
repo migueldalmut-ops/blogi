@@ -5,61 +5,117 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enciclopédia Suprema dos Gatos 🐾</title>
     <style>
+        /* Variáveis de Cores para Temas */
+        :root {
+            --bg-body: #f4f7f6;
+            --bg-card: #ffffff;
+            --text-main: #2d3748;
+            --text-muted: #718096;
+            --primary: #ff7675;
+            --primary-light: #fff5f5;
+            --accent: #fdcb6e;
+            --shadow: rgba(0, 0, 0, 0.05);
+            --header-gradient: linear-gradient(135deg, #ff7675 0%, #ffb7b2 100%);
+        }
+
+        [data-theme="dark"] {
+            --bg-body: #1a202c;
+            --bg-card: #2d3748;
+            --text-main: #f7fafc;
+            --text-muted: #a0aec0;
+            --primary: #ff7675;
+            --primary-light: #3b2323;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --header-gradient: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         body {
-            background-color: #f7f9fc;
-            color: #333;
+            background-color: var(--bg-body);
+            color: var(--text-main);
             line-height: 1.6;
         }
 
+        /* Botão de Tema */
+        .theme-toggle {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.4);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
         header {
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            background: var(--header-gradient);
             color: white;
             text-align: center;
-            padding: 3rem 1rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 4rem 1rem;
+            box-shadow: 0 4px 20px var(--shadow);
+            position: relative;
         }
 
         header h1 {
-            font-size: 2.8rem;
+            font-size: 3rem;
             margin-bottom: 0.5rem;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+            letter-spacing: -1px;
         }
 
-        header p {
-            font-size: 1.2rem;
-            font-style: italic;
-        }
-
-        .search-container {
-            margin-top: 1.5rem;
+        /* Controles de Busca e Filtro */
+        .controls {
+            max-width: 700px;
+            margin: 2rem auto 0 auto;
+            padding: 0 1rem;
         }
 
         #searchBar {
             width: 100%;
-            max-width: 500px;
-            padding: 0.8rem 1.5rem;
+            padding: 1rem 1.5rem;
             border: none;
-            border-radius: 30px;
-            font-size: 1rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-radius: 50px;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             outline: none;
-            transition: all 0.3s;
         }
 
-        #searchBar:focus {
-            box-shadow: 0 4px 20px rgba(255, 154, 158, 0.5);
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
         }
 
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        /* Container Principal */
         .container {
             max-width: 1300px;
-            margin: 2rem auto;
+            margin: 3rem auto;
             padding: 0 1.5rem;
         }
 
@@ -69,25 +125,39 @@
             gap: 2.5rem;
         }
 
+        /* Cards Estilizados */
         .card-gato {
-            background-color: white;
-            border-radius: 20px;
+            background-color: var(--bg-card);
+            border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 10px 30px var(--shadow);
             display: flex;
             flex-direction: column;
+            transform: translateY(0);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
+            cursor: pointer;
         }
 
         .card-gato:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .img-container {
+            overflow: hidden;
+            height: 260px;
+            position: relative;
         }
 
         .foto-gato {
             width: 100%;
-            height: 280px;
+            height: 100%;
             object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .card-gato:hover .foto-gato {
+            transform: scale(1.08);
         }
 
         .conteudo-gato {
@@ -98,15 +168,15 @@
         }
 
         .conteudo-gato h3 {
-            color: #ff6b6b;
             font-size: 1.8rem;
-            margin-bottom: 0.3rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
         }
 
         .tag-origem {
             display: inline-block;
-            background-color: #ffe8e8;
-            color: #ff5252;
+            background-color: var(--primary-light);
+            color: var(--primary);
             padding: 0.3rem 0.8rem;
             border-radius: 20px;
             font-size: 0.85rem;
@@ -116,282 +186,175 @@
         }
 
         .descricao {
+            color: var(--text-muted);
             font-size: 1rem;
-            color: #666;
             margin-bottom: 1.5rem;
+            flex-grow: 1;
         }
 
         .info-tecnica {
-            background-color: #fff9f9;
-            padding: 1rem;
-            border-radius: 12px;
-            border-left: 4px solid #ff9a9e;
-            margin-top: auto;
+            background-color: var(--bg-body);
+            padding: 1.2rem;
+            border-radius: 16px;
+            list-style: none;
         }
 
         .info-tecnica li {
-            list-style: none;
             margin-bottom: 0.5rem;
             font-size: 0.95rem;
         }
 
-        .info-tecnica li:last-child {
-            margin-bottom: 0;
+        .info-tecnica li:last-child { margin-bottom: 0; }
+
+        /* Modal (Janela de detalhes) */
+        .modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 100;
+            padding: 1rem;
         }
 
-        .info-tecnica strong {
-            color: #444;
+        .modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            padding: 2.5rem;
+            border-radius: 24px;
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem; right: 1rem;
+            background: none; border: none;
+            font-size: 1.5rem; color: var(--text-muted);
+            cursor: pointer;
         }
 
         footer {
-            background-color: #2c3e50;
+            background-color: #1a202c;
             color: white;
             text-align: center;
-            padding: 2rem;
+            padding: 2.5rem;
             margin-top: 5rem;
-            font-size: 1rem;
-        }
-
-        @media (max-width: 768px) {
-            header h1 { font-size: 2rem; }
-            .grid-racas { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>O Grande Guia das Raças de Gatos 🐱</h1>
-        <p>Explore o comportamento, origem e curiosidades sobre os felinos mais fofos do mundo!</p>
-        <div class="search-container">
-            <input type="text" id="searchBar" placeholder="Pesquise por uma raça de gato..." onkeyup="filtrarGatos()">
+        <button class="theme-toggle" onclick="toggleTheme()">🌓 Alternar Tema</button>
+        <h1>Mundo Felino Premium 🐱</h1>
+        <p>A enciclopédia definitiva dos apaixonados por gatos</p>
+        
+        <div class="controls">
+            <input type="text" id="searchBar" placeholder="🔍 Digite uma raça para buscar..." onkeyup="filtrarGatos()">
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filtrarTags('todos', this)">Todos</button>
+                <button class="filter-btn" onclick="filtrarTags('Calmo', this)">Calmos 💤</button>
+                <button class="filter-btn" onclick="filtrarTags('Ativo', this)">Ativos ⚡</button>
+                <button class="filter-btn" onclick="filtrarTags('Sociável', this)">Super Sociáveis 🤝</button>
+            </div>
         </div>
     </header>
 
     <div class="container">
         <div class="grid-racas" id="listaGatos">
 
-            <!-- 1. Persa -->
-            <div class="card-gato">
-                <img src="https://images.unsplash.com/photo-1614963326505-843868e1d83a?auto=format&fit=crop&q=80&w=600" alt="Gato Persa" class="foto-gato">
+            <!-- Card 1: Persa -->
+            <div class="card-gato" data-tipo="Calmo" onclick="abrirModal('Persa', 'Essa raça precisa de escovação diária por conta do tamanho dos pelos. Evite banhos em excesso, mas limpe os olhos constantemente para evitar manchas de lágrimas.')">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1614963326505-843868e1d83a?auto=format&fit=crop&q=80&w=600" alt="Persa" class="foto-gato">
+                </div>
                 <div class="conteudo-gato">
                     <h3>Persa</h3>
-                    <span class="tag-origem">Origem: Irã (Antiga Pérsia)</span>
-                    <p class="descricao">Famoso por seu focinho achatado e pelagem longuíssima. É o epítome do gato de colo: extremamente calmo, dócil e silencioso. Adora uma rotina pacífica.</p>
+                    <span class="tag-origem">Origem: Irã</span>
+                    <p class="descricao">Rei da calmaria e do conforto. Um gato extremamente silencioso, perfeito para apartamentos e rotinas pacíficas.</p>
                     <ul class="info-tecnica">
-                        <li><strong>Temperamento:</strong> Calmo, carinhoso e sedentário</li>
-                        <li><strong>Expectativa de Vida:</strong> 12 a 15 anos</li>
-                        <li><strong>Curiosidade:</strong> Precisam de escovação diária para não embolar o pelo.</li>
+                        <li><strong>Temperamento:</strong> Calmo e Sedentário</li>
+                        <li><strong>Expectativa:</strong> 12 a 15 anos</li>
                     </ul>
                 </div>
             </div>
 
-            <!-- 2. Maine Coon -->
-            <div class="card-gato">
-                <img src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?auto=format&fit=crop&q=80&w=600" alt="Gato Maine Coon" class="foto-gato">
+            <!-- Card 2: Maine Coon -->
+            <div class="card-gato" data-tipo="Sociável" onclick="abrirModal('Maine Coon', 'Por ser um gato gigante, ele precisa de espaço para se esticar e arranhadores reforçados. Monitore o coração e articulações em consultas veterinárias de rotina.')">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?auto=format&fit=crop&q=80&w=600" alt="Maine Coon" class="foto-gato">
+                </div>
                 <div class="conteudo-gato">
                     <h3>Maine Coon</h3>
                     <span class="tag-origem">Origem: Estados Unidos</span>
-                    <p class="descricao">O "Gigante Gentil". É a maior raça de gato doméstico do mundo. Possuem pelos longos adaptados ao frio e uma cauda enorme que parece uma plumagem.</p>
+                    <p class="descricao">O gigante gentil do mundo felino. Ama água, adora brincar e se dá bem com todas as visitas e outros animais.</p>
                     <ul class="info-tecnica">
-                        <li><strong>Temperamento:</strong> Sociável, brincalhão e amigável</li>
-                        <li><strong>Expectativa de Vida:</strong> 10 a 14 anos</li>
-                        <li><strong>Curiosidade:</strong> Eles adoram água e são ótimos caçadores.</li>
+                        <li><strong>Temperamento:</strong> Sociável e Brincalhão</li>
+                        <li><strong>Expectativa:</strong> 10 a 14 anos</li>
                     </ul>
                 </div>
             </div>
 
-            <!-- 3. Siamês -->
-            <div class="card-gato">
-                <img src="https://images.unsplash.com/photo-1513360309081-36f5e8804245?auto=format&fit=crop&q=80&w=600" alt="Gato Siamês" class="foto-gato">
+            <!-- Card 3: Siamês -->
+            <div class="card-gato" data-tipo="Ativo" onclick="abrirModal('Siamês', 'Gatos siameses são carentes e vocais. Invista em brinquedos de inteligência e dedique pelo menos 30 minutos por dia para conversar e brincar ativamente com ele.')">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1513360309081-36f5e8804245?auto=format&fit=crop&q=80&w=600" alt="Siamês" class="foto-gato">
+                </div>
                 <div class="conteudo-gato">
                     <h3>Siamês</h3>
                     <span class="tag-origem">Origem: Tailândia</span>
-                    <p class="descricao">Uma das raças mais antigas e elegantes. Têm olhos azuis intensos e corpo esguio. São extremamente comunicativos e apegados aos donos.</p>
+                    <p class="descricao">Elegante, ativo e super tagarela. Ele vai miar alto de volta para responder qualquer frase que você disser a ele.</p>
                     <ul class="info-tecnica">
-                        <li><strong>Temperamento:</strong> Extrovertido, ciumento e muito vocal</li>
-                        <li><strong>Expectativa de Vida:</strong> 15 a 20 anos</li>
-                        <li><strong>Curiosidade:</strong> Eles miarem alto como se estivessem conversando com você.</li>
+                        <li><strong>Temperamento:</strong> Ativo e Muito Vocal</li>
+                        <li><strong>Expectativa:</strong> 15 a 20 anos</li>
                     </ul>
                 </div>
             </div>
 
-            <!-- 4. Ragdoll -->
-            <div class="card-gato">
-                <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&q=80&w=600" alt="Gato Ragdoll" class="foto-gato">
+            <!-- Card 4: Ragdoll -->
+            <div class="card-gato" data-tipo="Calmo" onclick="abrirModal('Ragdoll', 'Eles são tão mansos que não sabem se defender na rua; devem ser gatos 100% caseiros. Adoram caminhar no colo como se fossem bebês.')">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&q=80&w=600" alt="Ragdoll" class="foto-gato">
+                </div>
                 <div class="conteudo-gato">
                     <h3>Ragdoll</h3>
                     <span class="tag-origem">Origem: Estados Unidos</span>
-                    <p class="descricao">Seu nome significa "Boneca de Pano", pois eles relaxam completamente o corpo quando são pegos no colo. São gigantes, peludos e de olhos azuis.</p>
+                    <p class="descricao">Ganha esse nome porque relaxa totalmente os músculos no colo. É o gato-parceiro perfeito para crianças.</p>
                     <ul class="info-tecnica">
-                        <li><strong>Temperamento:</strong> Doce, pacato e dependente de afeto</li>
-                        <li><strong>Expectativa de Vida:</strong> 12 a 17 anos</li>
-                        <li><strong>Curiosidade:</strong> Costumam seguir os donos pela casa igual a cachorrinhos.</li>
+                        <li><strong>Temperamento:</strong> Doce e Calmo</li>
+                        <li><strong>Expectativa:</strong> 12 a 17 anos</li>
                     </ul>
                 </div>
             </div>
 
-            <!-- 5. Bengal (Gato de Bengala) -->
-            <div class="card-gato">
-                <img src="https://images.unsplash.com/photo-1608848461950-0fe51dfc41cb?auto=format&fit=crop&q=80&w=600" alt="Gato Bengal" class="foto-gato">
+            <!-- Card 5: Bengal -->
+            <div class="card-gato" data-tipo="Ativo" onclick="abrirModal('Bengal', 'Ele tem sangue de felino selvagem! Precisa de enriquecimento ambiental vertical (prateleiras altas) e muita atividade física para não ficar estressado.')">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1608848461950-0fe51dfc41cb?auto=format&fit=crop&q=80&w=600" alt="Bengal" class="foto-gato">
+                </div>
                 <div class="conteudo-gato">
                     <h3>Bengal</h3>
                     <span class="tag-origem">Origem: Estados Unidos</span>
-                    <p class="descricao">Parece um leopardo em miniatura! Essa raça nasceu do cruzamento de gatos domésticos com o gato-leopardo asiático selvagem. São cheios de energia.</p>
+                    <p class="descricao">Parece um leopardo doméstico. Tem energia inesgotável, inteligência acima da média e pelos que brilham como ouro no sol.</p>
                     <ul class="info-tecnica">
-                        <li><strong>Temperamento:</strong> Ativo, curioso e inteligente</li>
-                        <li><strong>Expectativa de Vida:</strong> 12 a 16 anos</li>
-                        <li><strong>Curiosidade:</strong> Sua pelagem tem um brilho único que parece glitter sob o sol.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- 6. Sphynx -->
-            <div class="card-gato">
-                <img src="https://images.unsplash.com/photo-1526336028061-b3b8f6af2936?auto=format&fit=crop&q=80&w=600" alt="Gato Sphynx" class="foto-gato">
-                <div class="conteudo-gato">
-                    <h3>Sphynx</h3>
-                    <span class="tag-origem">Origem: Canadá</span>
-                    <p class="descricao">O famoso gato sem pelo. Na verdade, eles têm uma penugem muito fina invisível a olho nu. São extremamente afetuosos porque buscam o calor humano.</p>
-                    <ul class="info-tecnica">
-                        <li><strong>Temperamento:</strong> Extremamente apegado, brincalhão e vivo</li>
-                        <li><strong>Expectativa de Vida:</strong> 11 a 15 anos</li>
-                        <li><strong>Curiosidade:</strong> Eles precisam de banhos regulares, pois a pele acumula oleosidade.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- 7. British Shorthair -->
-            <div class="card-gato">
-                <img src="https://images.unsplash.com/photo-1574158622672-b4d0a5ef869a?auto=format&fit=crop&q=80&w=600" alt="Gato British Shorthair" class="foto-gato">
-                <div class="conteudo-gato">
-                    <h3>British Shorthair</h3>
-                    <span class="tag-origem">Origem: Reino Unido</span>
-                    <p class="descricao">Com bochechas rechonchudas e pelos cinza-azulados densos, ele parece um ursinho de pelúcia. É uma das raças inglesas mais antigas.</p>
-                    <ul class="info-tecnica">
-                        <li><strong>Temperamento:</strong> Equilibrado, independente e calmo</li>
-                        <li><strong>Expectativa de Vida:</strong> 12 a 17 anos</li>
-                        <li><strong>Curiosidade:</strong> Foi a inspiração para o Gato de Cheshire no livro "Alice no País das Maravilhas".</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- 8. Azul Russo -->
-            <div class="card-gato">
-                <img src="https://images.unsplash.com/photo-1592194996308-7b43878e84a6?auto=format&fit=crop&q=80&w=600" alt="Gato Azul Russo" class="foto-gato">
-                <div class="conteudo-gato">
-                    <h3>Azul Russo</h3>
-                    <span class="tag-origem">Origem: Rússia</span>
-                    <p class="descricao">Um gato aristocrático de pelagem cinza-prateada curta e olhos verde-esmeralda brilhantes. É tímido com estranhos, mas muito leal à família.</p>
-                    <ul class="info-tecnica">
-                        <li><strong>Temperamento:</strong> Discreto, inteligente e observador</li>
-                        <li><strong>Expectativa de Vida:</strong> 15 a 20 anos</li>
-                        <li><strong>Curiosidade:</strong> São extremamente limpos e detestam ver a caixinha de areia suja.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- 9. Scottish Fold -->
-            <div class="card-gato">
-                <img src="https://images.unsplash.com/photo-1561948955-570b270e7c36?auto=format&fit=crop&q=80&w=600" alt="Gato Scottish Fold" class="foto-gato">
-                <div class="conteudo-gato">
-                    <h3>Scottish Fold</h3>
-                    <span class="tag-origem">Origem: Escócia</span>
-                    <p class="descricao">Famoso por suas orelhas dobradas para frente e para baixo, dando-lhe uma expressão constante de surpresa ou fofura. Tem olhos grandes e redondos.</p>
-                    <ul class="info-tecnica">
-                        <li><strong>Temperamento:</strong> Afetuoso, companheiro e brincalhão</li>
-                        <li><strong>Expectativa de Vida:</strong> 11 a 15 anos</li>
-                        <li><strong>Curiosidade:</strong> Adoram sentar na "posição de Buda", com as patinhas traseiras esticadas para a frente.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- 10. Sagrado da Birmânia -->
-            <div class="card-gato">
-                <img src="https://images.unsplash.com/photo-1548247416-ec66f4900b2e?auto=format&fit=crop&q=80&w=600" alt="Gato Sagrado da Birmânia" class="foto-gato">
-                <div class="conteudo-gato">
-                    <h3>Sagrado da Birmânia</h3>
-                    <span class="tag-origem">Origem: Mianmar (Birmânia)</span>
-                    <p class="descricao">Diz a lenda que eram guardiões de templos budistas. Eles têm olhos azuis safira, pelos longos e "luvas" brancas puras nas quatro patinhas.</p>
-                    <ul class="info-tecnica">
-                        <li><strong>Temperamento:</strong> Gentil, sociável e equilibrado</li>
-                        <li><strong>Expectativa de Vida:</strong> 12 a 16 anos</li>
-                        <li><strong>Curiosidade:</strong> São muito dóceis e fáceis de lidar, convivendo muito bem com crianças e outros pets.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- 11. Abissínio -->
-            <div class="card-gato">
-                <img src="https://images.unsplash.com/photo-1511275539165-cc46b1ee8960?auto=format&fit=crop&q=80&w=600" alt="Gato Abissínio" class="foto-gato">
-                <div class="conteudo-gato">
-                    <h3>Abissínio</h3>
-                    <span class="tag-origem">Origem: Etiópia (Antiga Abissínia)</span>
-                    <p class="descricao">Um gato que se assemelha a um pequeno puma selvagem. Tem o corpo musculoso, orelhas grandes e uma pelagem com efeito "ticked" (várias faixas de cor no mesmo fio).</p>
-                    <ul class="info-tecnica">
-                        <li><strong>Temperamento:</strong> Atlético, extremamente ativo e curioso</li>
-                        <li><strong>Expectativa de Vida:</strong> 12 a 15 anos</li>
-                        <li><strong>Curiosidade:</strong> Ele não para quieto! Adora escalar as partes mais altas da casa.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- 12. Norueguês da Floresta -->
-            <div class="card-gato">
-                <img src="https://images.unsplash.com/photo-1536590158209-e9d615d525e4?auto=format&fit=crop&q=80&w=600" alt="Gato Norueguês da Floresta" class="foto-gato">
-                <div class="conteudo-gato">
-                    <h3>Norueguês da Floresta</h3>
-                    <span class="tag-origem">Origem: Noruega</span>
-                    <p class="descricao">Um gato rústico e majestoso criado para aguentar o inverno escandinavo. Tem uma pelagem dupla impermeável e uma gola de pelo volumosa ao redor do pescoço.</p>
-                    <ul class="info-tecnica">
-                        <li><strong>Temperamento:</strong> Independente mas amoroso, exímio escalador</li>
-                        <li><strong>Expectativa de Vida:</strong> 14 a 16 anos</li>
-                        <li><strong>Curiosidade:</strong> Na mitologia nórdica, o carro da deusa Freya era puxado por dois grandes gatos dessa raça.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- 13. Munchkin -->
-            <div class="card-gato">
-                <img src="https://images.unsplash.com/photo-1596492784531-6e6eb5ea9993?auto=format&fit=crop&q=80&w=600" alt="Gato Munchkin" class="foto-gato">
-                <div class="conteudo-gato">
-                    <h3>Munchkin</h3>
-                    <span class="tag-origem">Origem: Estados Unidos</span>
-                    <p class="descricao">Conhecido como o "gato rebaixado" devido às suas pernas muito curtas resultantes de uma mutação genética natural. Seu corpo tem tamanho normal.</p>
-                    <ul class="info-tecnica">
-                        <li><strong>Temperamento:</strong> Extrovertido, veloz e eterno filhote</li>
-                        <li><strong>Expectativa de Vida:</strong> 12 a 14 anos</li>
-                        <li><strong>Curiosidade:</strong> Apesar das pernas curtas, eles correm e fazem curvas de forma extremamente rápida.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- 14. Bombaim (Bombay) -->
-            <div class="card-gato">
-                <img src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&q=80&w=600" alt="Gato Bombaim" class="foto-gato">
-                <div class="conteudo-gato">
-                    <h3>Bombaim</h3>
-                    <span class="tag-origem">Origem: Estados Unidos / Tailândia</span>
-                    <p class="descricao">Uma mini pantera negra! Pelos pretos curtíssimos e brilhantes como cetim, combinados com impressionantes olhos cor de cobre ou ouro.</p>
-                    <ul class="info-tecnica">
-                        <li><strong>Temperamento:</strong> Carente, caloroso e muito inteligente</li>
-                        <li><strong>Expectativa de Vida:</strong> 13 a 15 anos</li>
-                        <li><strong>Curiosidade:</strong> Quase todas as panterinhas pretas dessa raça adoram passear de coleira na rua.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- 15. Vira-Lata (SDR) -->
-            <div class="card-gato">
-                <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&q=80&w=600" alt="Gato Sem Raça Definida" class="foto-gato">
-                <div class="conteudo-gato">
-                    <h3>Sem Raça Definida (SDR)</h3>
-                    <span class="tag-origem">Origem: Todo o mundo</span>
-                    <p class="descricao">Os reis das casas brasileiras! Mistura única de cores (frajolinhas, calicos, tigrados, laranjinhas). São os mais resistentes do mundo felino.</p>
-                    <ul class="info-tecnica">
-                        <li><strong>Temperamento:</strong> Imprevisível (de supercarinhoso a superindependente)</li>
-                        <li><strong>Expectativa de Vida:</strong> 15 a 22 anos (vivem muito!)</li>
-                        <li><strong>Curiosidade:</strong> Cada um tem uma personalidade e padrão de pelos 100% único no mundo.</li>
+                        <li><strong>Temperamento:</strong> Ativo e Curioso</li>
+                        <li><strong>Expectativa:</strong> 12 a 16 anos</li>
                     </ul>
                 </div>
             </div>
@@ -399,22 +362,69 @@
         </div>
     </div>
 
+    <!-- Estrutura do Janela Pop-up (Modal) -->
+    <div class="modal" id="modalGato" onclick="fecharModal(event)">
+        <div class="modal-content">
+            <button class="close-modal" onclick="document.getElementById('modalGato').classList.remove('active')">✕</button>
+            <h2 id="modalTitulo" style="color: var(--primary); margin-bottom: 1rem;"></h2>
+            <p><strong>Dicas de Cuidados Especiais:</strong></p>
+            <p id="modalTexto" style="margin-top: 0.5rem; color: var(--text-muted);"></p>
+        </div>
+    </div>
+
     <footer>
-        <p>Desenvolvido com todo o amor felino do mundo! 🐾 Miauuu!</p>
+        <p>Guia Felino © 2026 - Desenvolvido para amantes de gatinhos fofos 🐾</p>
     </footer>
 
     <script>
+        // Função do Filtro por Digitação
         function filtrarGatos() {
             let input = document.getElementById('searchBar').value.toLowerCase();
             let cards = document.getElementsByClassName('card-gato');
 
-            for (let i = 0; i < cards.length; i++) {
-                let nomeRaca = cards[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
-                if (nomeRaca.includes(input)) {
-                    cards[i].style.display = "";
+            for (let card of cards) {
+                let nome = card.querySelector('h3').innerText.toLowerCase();
+                card.style.display = nome.includes(input) ? "" : "none";
+            }
+        }
+
+        // Função do Filtro por Botões de Categoria
+        function filtrarTags(categoria, botao) {
+            // Atualiza o botão ativo
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            botao.classList.add('active');
+
+            let cards = document.getElementsByClassName('card-gato');
+            for (let card of cards) {
+                let tipo = card.getAttribute('data-tipo');
+                if (categoria === 'todos' || tipo.includes(categoria)) {
+                    card.style.display = "";
                 } else {
-                    cards[i].style.display = "none";
+                    card.style.display = "none";
                 }
+            }
+        }
+
+        // Função para Abrir a Janela com Detalhes Extras
+        function abrirModal(nome, texto) {
+            document.getElementById('modalTitulo').innerText = nome;
+            document.getElementById('modalTexto').innerText = texto;
+            document.getElementById('modalGato').classList.add('active');
+        }
+
+        function fecharModal(e) {
+            if (e.target.classList.contains('modal')) {
+                document.getElementById('modalGato').classList.remove('active');
+            }
+        }
+
+        // Sistema de Troca de Tema (Claro / Escuro)
+        function toggleTheme() {
+            const currentTheme = document.body.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                document.body.removeAttribute('data-theme');
+            } else {
+                document.body.setAttribute('data-theme', 'dark');
             }
         }
     </script>
