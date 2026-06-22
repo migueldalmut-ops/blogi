@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>O Mundo Encantado dos Gatos 🐾</title>
+    <title>Enciclopédia Suprema dos Gatos 🐾</title>
     <style>
         * {
             margin: 0;
@@ -13,195 +13,385 @@
         }
 
         body {
-            background-color: #f9f6f0;
+            background-color: #f7f9fc;
             color: #333;
             line-height: 1.6;
         }
 
         header {
-            background-color: #ffb7b2;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
             color: white;
             text-align: center;
-            padding: 2.5rem 1rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 3rem 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
         header h1 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             margin-bottom: 0.5rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
         }
 
         header p {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-style: italic;
         }
 
+        .search-container {
+            margin-top: 1.5rem;
+        }
+
+        #searchBar {
+            width: 100%;
+            max-width: 500px;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        #searchBar:focus {
+            box-shadow: 0 4px 20px rgba(255, 154, 158, 0.5);
+        }
+
         .container {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 2rem auto;
-            padding: 0 1rem;
+            padding: 0 1.5rem;
         }
 
-        .intro {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 15px;
-            margin-bottom: 2rem;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            border-left: 5px solid #ffb7b2;
-        }
-
-        .titulo-secao {
-            text-align: center;
-            color: #e57373;
-            margin: 2rem 0;
-            font-size: 2rem;
-        }
-
-        /* Grid de Raças */
         .grid-racas {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
         }
 
         .card-gato {
             background-color: white;
-            border-radius: 15px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
 
         .card-gato:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
         }
 
         .foto-gato {
             width: 100%;
-            height: 250px;
+            height: 280px;
             object-fit: cover;
         }
 
         .conteudo-gato {
-            padding: 1.5rem;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
         }
 
         .conteudo-gato h3 {
-            color: #ff8a80;
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
+            color: #ff6b6b;
+            font-size: 1.8rem;
+            margin-bottom: 0.3rem;
         }
 
         .tag-origem {
             display: inline-block;
-            background-color: #ffe0b2;
-            color: #e65100;
-            padding: 0.2rem 0.6rem;
+            background-color: #ffe8e8;
+            color: #ff5252;
+            padding: 0.3rem 0.8rem;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-weight: bold;
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
+            align-self: flex-start;
         }
 
-        .info-lista {
+        .descricao {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-tecnica {
+            background-color: #fff9f9;
+            padding: 1rem;
+            border-radius: 12px;
+            border-left: 4px solid #ff9a9e;
+            margin-top: auto;
+        }
+
+        .info-tecnica li {
             list-style: none;
-            margin-top: 1rem;
-        }
-
-        .info-lista li {
             margin-bottom: 0.5rem;
             font-size: 0.95rem;
         }
 
-        .info-lista strong {
-            color: #555;
+        .info-tecnica li:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-tecnica strong {
+            color: #444;
         }
 
         footer {
-            background-color: #333;
+            background-color: #2c3e50;
             color: white;
             text-align: center;
-            padding: 1.5rem;
-            margin-top: 4rem;
-            font-size: 0.9rem;
+            padding: 2rem;
+            margin-top: 5rem;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            .grid-racas { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>O Mundo Encantado dos Gatos 🐱</h1>
-        <p>Descubra as raças mais fofas, elegantes e fascinantes do universo felino!</p>
+        <h1>O Grande Guia das Raças de Gatos 🐱</h1>
+        <p>Explore o comportamento, origem e curiosidades sobre os felinos mais fofos do mundo!</p>
+        <div class="search-container">
+            <input type="text" id="searchBar" placeholder="Pesquise por uma raça de gato..." onkeyup="filtrarGatos()">
+        </div>
     </header>
 
     <div class="container">
-        
-        <section class="intro">
-            <h2>Por que amamos tanto os gatos?</h2>
-            <p>Os gatos são companheiros misteriosos, independentes e extremamente carinhosos (do jeito deles!). Domésticos há milhares de anos, eles conquistaram o mundo com seus ronrons terapêuticos, agilidade incrível e, claro, muita fofura. Abaixo, separamos algumas das raças mais famosas do mundo para você conhecer melhor.</p>
-        </section>
+        <div class="grid-racas" id="listaGatos">
 
-        <h2 class="titulo-secao">Conheça as Raças</h2>
-
-        <div class="grid-racas">
-
-            <!-- Gato 1: Persa -->
+            <!-- 1. Persa -->
             <div class="card-gato">
-                <img src="https://images.unsplash.com/photo-1614963326505-843868e1d83a?auto=format&fit=crop&q=80&w=600" alt="Gato Persa Branco Fofinho" class="foto-gato">
+                <img src="https://images.unsplash.com/photo-1614963326505-843868e1d83a?auto=format&fit=crop&q=80&w=600" alt="Gato Persa" class="foto-gato">
                 <div class="conteudo-gato">
                     <h3>Persa</h3>
-                    <span class="tag-origem">Origem: Pérsia (Irã)</span>
-                    <p>O Persa é o verdadeiro rei da calmaria. Conhecido por seu focinho achatado e sua pelagem incrivelmente longa e sedosa, é o gato perfeito para quem busca um companheiro tranquilo.</p>
-                    <ul class="info-lista">
-                        <li><strong>Temperamento:</strong> Calmo, doce e silencioso.</li>
-                        <li><strong>Expectativa de vida:</strong> 12 a 15 anos.</li>
-                        <li><strong>Curiosidade:</strong> Eles adoram rotina e não são muito fãs de pular em lugares altos.</li>
+                    <span class="tag-origem">Origem: Irã (Antiga Pérsia)</span>
+                    <p class="descricao">Famoso por seu focinho achatado e pelagem longuíssima. É o epítome do gato de colo: extremamente calmo, dócil e silencioso. Adora uma rotina pacífica.</p>
+                    <ul class="info-tecnica">
+                        <li><strong>Temperamento:</strong> Calmo, carinhoso e sedentário</li>
+                        <li><strong>Expectativa de Vida:</strong> 12 a 15 anos</li>
+                        <li><strong>Curiosidade:</strong> Precisam de escovação diária para não embolar o pelo.</li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Gato 2: Maine Coon -->
+            <!-- 2. Maine Coon -->
             <div class="card-gato">
-                <img src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?auto=format&fit=crop&q=80&w=600" alt="Gato Maine Coon Lindo" class="foto-gato">
+                <img src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?auto=format&fit=crop&q=80&w=600" alt="Gato Maine Coon" class="foto-gato">
                 <div class="conteudo-gato">
                     <h3>Maine Coon</h3>
                     <span class="tag-origem">Origem: Estados Unidos</span>
-                    <p>Conhecido como o "gigante gentil", o Maine Coon é uma das maiores raças de gatos domésticos do mundo. Apesar do tamanho imponente, eles têm o coração do tamanho de um filhote.</p>
-                    <ul class="info-lista">
-                        <li><strong>Temperamento:</strong> Brincalhão, sociável e muito apegado.</li>
-                        <li><strong>Expectativa de vida:</strong> 10 a 13 anos.</li>
-                        <li><strong>Curiosidade:</strong> Ao contrário da maioria dos gatos, muitos Maine Coons *adoram* água!</li>
+                    <p class="descricao">O "Gigante Gentil". É a maior raça de gato doméstico do mundo. Possuem pelos longos adaptados ao frio e uma cauda enorme que parece uma plumagem.</p>
+                    <ul class="info-tecnica">
+                        <li><strong>Temperamento:</strong> Sociável, brincalhão e amigável</li>
+                        <li><strong>Expectativa de Vida:</strong> 10 a 14 anos</li>
+                        <li><strong>Curiosidade:</strong> Eles adoram água e são ótimos caçadores.</li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Gato 3: Siamês -->
+            <!-- 3. Siamês -->
             <div class="card-gato">
-                <img src="https://images.unsplash.com/photo-1513360309081-36f5e8804245?auto=format&fit=crop&q=80&w=600" alt="Gato Siamês de Olhos Azuis" class="foto-gato">
+                <img src="https://images.unsplash.com/photo-1513360309081-36f5e8804245?auto=format&fit=crop&q=80&w=600" alt="Gato Siamês" class="foto-gato">
                 <div class="conteudo-gato">
                     <h3>Siamês</h3>
                     <span class="tag-origem">Origem: Tailândia</span>
-                    <p>Com seus olhos azuis cristalinos marcantes e extremidades escuras, o Siamês é uma das raças mais antigas e reconhecíveis do planeta. Eles são extremamente comunicativos.</p>
-                    <ul class="info-lista">
-                        <li><strong>Temperamento:</strong> Extrovertido, tagarela e ciumento.</li>
-                        <li><strong>Expectativa de vida:</strong> 15 a 20 anos.</li>
-                        <li><strong>Curiosidade:</strong> Se você conversar com um Siamês, ele provavelmente vai miar de volta para te "responder".</li>
+                    <p class="descricao">Uma das raças mais antigas e elegantes. Têm olhos azuis intensos e corpo esguio. São extremamente comunicativos e apegados aos donos.</p>
+                    <ul class="info-tecnica">
+                        <li><strong>Temperamento:</strong> Extrovertido, ciumento e muito vocal</li>
+                        <li><strong>Expectativa de Vida:</strong> 15 a 20 anos</li>
+                        <li><strong>Curiosidade:</strong> Eles miarem alto como se estivessem conversando com você.</li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Gato 4: Ragdoll -->
+            <!-- 4. Ragdoll -->
             <div class="card-gato">
-                <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&q=80&w=600" alt="Gato Ragdoll Fofo" class="foto-gato">
+                <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&q=80&w=600" alt="Gato Ragdoll" class="foto-gato">
                 <div class="conteudo-gato">
                     <h3>Ragdoll</h3>
                     <span class="tag-origem">Origem: Estados Unidos</span>
-                    <p>O nome "Ragdoll" significa "boneca de pano". Esse nome foi dado porque essa raça tem a característica única de relaxar completamente os músculos quando é colada no colo.</p>
-                    <ul class="info-lista">
-                        <li><strong>Temperamento:</strong> Extremamente dócil, afetuoso e preguiçoso.</li>
-                        <li><strong>Expectativa de vida:</strong> 12 a 17 anos.</li>
-                        <li><strong>Curiosidade:</strong> Eles são tão mansos que são conhecidos como os "gatos-cachorros", pois seguem os donos pela casa toda.</li>
+                    <p class="descricao">Seu nome significa "Boneca de Pano", pois eles relaxam completamente o corpo quando são pegos no colo. São gigantes, peludos e de olhos azuis.</p>
+                    <ul class="info-tecnica">
+                        <li><strong>Temperamento:</strong> Doce, pacato e dependente de afeto</li>
+                        <li><strong>Expectativa de Vida:</strong> 12 a 17 anos</li>
+                        <li><strong>Curiosidade:</strong> Costumam seguir os donos pela casa igual a cachorrinhos.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 5. Bengal (Gato de Bengala) -->
+            <div class="card-gato">
+                <img src="https://images.unsplash.com/photo-1608848461950-0fe51dfc41cb?auto=format&fit=crop&q=80&w=600" alt="Gato Bengal" class="foto-gato">
+                <div class="conteudo-gato">
+                    <h3>Bengal</h3>
+                    <span class="tag-origem">Origem: Estados Unidos</span>
+                    <p class="descricao">Parece um leopardo em miniatura! Essa raça nasceu do cruzamento de gatos domésticos com o gato-leopardo asiático selvagem. São cheios de energia.</p>
+                    <ul class="info-tecnica">
+                        <li><strong>Temperamento:</strong> Ativo, curioso e inteligente</li>
+                        <li><strong>Expectativa de Vida:</strong> 12 a 16 anos</li>
+                        <li><strong>Curiosidade:</strong> Sua pelagem tem um brilho único que parece glitter sob o sol.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 6. Sphynx -->
+            <div class="card-gato">
+                <img src="https://images.unsplash.com/photo-1526336028061-b3b8f6af2936?auto=format&fit=crop&q=80&w=600" alt="Gato Sphynx" class="foto-gato">
+                <div class="conteudo-gato">
+                    <h3>Sphynx</h3>
+                    <span class="tag-origem">Origem: Canadá</span>
+                    <p class="descricao">O famoso gato sem pelo. Na verdade, eles têm uma penugem muito fina invisível a olho nu. São extremamente afetuosos porque buscam o calor humano.</p>
+                    <ul class="info-tecnica">
+                        <li><strong>Temperamento:</strong> Extremamente apegado, brincalhão e vivo</li>
+                        <li><strong>Expectativa de Vida:</strong> 11 a 15 anos</li>
+                        <li><strong>Curiosidade:</strong> Eles precisam de banhos regulares, pois a pele acumula oleosidade.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 7. British Shorthair -->
+            <div class="card-gato">
+                <img src="https://images.unsplash.com/photo-1574158622672-b4d0a5ef869a?auto=format&fit=crop&q=80&w=600" alt="Gato British Shorthair" class="foto-gato">
+                <div class="conteudo-gato">
+                    <h3>British Shorthair</h3>
+                    <span class="tag-origem">Origem: Reino Unido</span>
+                    <p class="descricao">Com bochechas rechonchudas e pelos cinza-azulados densos, ele parece um ursinho de pelúcia. É uma das raças inglesas mais antigas.</p>
+                    <ul class="info-tecnica">
+                        <li><strong>Temperamento:</strong> Equilibrado, independente e calmo</li>
+                        <li><strong>Expectativa de Vida:</strong> 12 a 17 anos</li>
+                        <li><strong>Curiosidade:</strong> Foi a inspiração para o Gato de Cheshire no livro "Alice no País das Maravilhas".</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 8. Azul Russo -->
+            <div class="card-gato">
+                <img src="https://images.unsplash.com/photo-1592194996308-7b43878e84a6?auto=format&fit=crop&q=80&w=600" alt="Gato Azul Russo" class="foto-gato">
+                <div class="conteudo-gato">
+                    <h3>Azul Russo</h3>
+                    <span class="tag-origem">Origem: Rússia</span>
+                    <p class="descricao">Um gato aristocrático de pelagem cinza-prateada curta e olhos verde-esmeralda brilhantes. É tímido com estranhos, mas muito leal à família.</p>
+                    <ul class="info-tecnica">
+                        <li><strong>Temperamento:</strong> Discreto, inteligente e observador</li>
+                        <li><strong>Expectativa de Vida:</strong> 15 a 20 anos</li>
+                        <li><strong>Curiosidade:</strong> São extremamente limpos e detestam ver a caixinha de areia suja.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 9. Scottish Fold -->
+            <div class="card-gato">
+                <img src="https://images.unsplash.com/photo-1561948955-570b270e7c36?auto=format&fit=crop&q=80&w=600" alt="Gato Scottish Fold" class="foto-gato">
+                <div class="conteudo-gato">
+                    <h3>Scottish Fold</h3>
+                    <span class="tag-origem">Origem: Escócia</span>
+                    <p class="descricao">Famoso por suas orelhas dobradas para frente e para baixo, dando-lhe uma expressão constante de surpresa ou fofura. Tem olhos grandes e redondos.</p>
+                    <ul class="info-tecnica">
+                        <li><strong>Temperamento:</strong> Afetuoso, companheiro e brincalhão</li>
+                        <li><strong>Expectativa de Vida:</strong> 11 a 15 anos</li>
+                        <li><strong>Curiosidade:</strong> Adoram sentar na "posição de Buda", com as patinhas traseiras esticadas para a frente.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 10. Sagrado da Birmânia -->
+            <div class="card-gato">
+                <img src="https://images.unsplash.com/photo-1548247416-ec66f4900b2e?auto=format&fit=crop&q=80&w=600" alt="Gato Sagrado da Birmânia" class="foto-gato">
+                <div class="conteudo-gato">
+                    <h3>Sagrado da Birmânia</h3>
+                    <span class="tag-origem">Origem: Mianmar (Birmânia)</span>
+                    <p class="descricao">Diz a lenda que eram guardiões de templos budistas. Eles têm olhos azuis safira, pelos longos e "luvas" brancas puras nas quatro patinhas.</p>
+                    <ul class="info-tecnica">
+                        <li><strong>Temperamento:</strong> Gentil, sociável e equilibrado</li>
+                        <li><strong>Expectativa de Vida:</strong> 12 a 16 anos</li>
+                        <li><strong>Curiosidade:</strong> São muito dóceis e fáceis de lidar, convivendo muito bem com crianças e outros pets.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 11. Abissínio -->
+            <div class="card-gato">
+                <img src="https://images.unsplash.com/photo-1511275539165-cc46b1ee8960?auto=format&fit=crop&q=80&w=600" alt="Gato Abissínio" class="foto-gato">
+                <div class="conteudo-gato">
+                    <h3>Abissínio</h3>
+                    <span class="tag-origem">Origem: Etiópia (Antiga Abissínia)</span>
+                    <p class="descricao">Um gato que se assemelha a um pequeno puma selvagem. Tem o corpo musculoso, orelhas grandes e uma pelagem com efeito "ticked" (várias faixas de cor no mesmo fio).</p>
+                    <ul class="info-tecnica">
+                        <li><strong>Temperamento:</strong> Atlético, extremamente ativo e curioso</li>
+                        <li><strong>Expectativa de Vida:</strong> 12 a 15 anos</li>
+                        <li><strong>Curiosidade:</strong> Ele não para quieto! Adora escalar as partes mais altas da casa.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 12. Norueguês da Floresta -->
+            <div class="card-gato">
+                <img src="https://images.unsplash.com/photo-1536590158209-e9d615d525e4?auto=format&fit=crop&q=80&w=600" alt="Gato Norueguês da Floresta" class="foto-gato">
+                <div class="conteudo-gato">
+                    <h3>Norueguês da Floresta</h3>
+                    <span class="tag-origem">Origem: Noruega</span>
+                    <p class="descricao">Um gato rústico e majestoso criado para aguentar o inverno escandinavo. Tem uma pelagem dupla impermeável e uma gola de pelo volumosa ao redor do pescoço.</p>
+                    <ul class="info-tecnica">
+                        <li><strong>Temperamento:</strong> Independente mas amoroso, exímio escalador</li>
+                        <li><strong>Expectativa de Vida:</strong> 14 a 16 anos</li>
+                        <li><strong>Curiosidade:</strong> Na mitologia nórdica, o carro da deusa Freya era puxado por dois grandes gatos dessa raça.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 13. Munchkin -->
+            <div class="card-gato">
+                <img src="https://images.unsplash.com/photo-1596492784531-6e6eb5ea9993?auto=format&fit=crop&q=80&w=600" alt="Gato Munchkin" class="foto-gato">
+                <div class="conteudo-gato">
+                    <h3>Munchkin</h3>
+                    <span class="tag-origem">Origem: Estados Unidos</span>
+                    <p class="descricao">Conhecido como o "gato rebaixado" devido às suas pernas muito curtas resultantes de uma mutação genética natural. Seu corpo tem tamanho normal.</p>
+                    <ul class="info-tecnica">
+                        <li><strong>Temperamento:</strong> Extrovertido, veloz e eterno filhote</li>
+                        <li><strong>Expectativa de Vida:</strong> 12 a 14 anos</li>
+                        <li><strong>Curiosidade:</strong> Apesar das pernas curtas, eles correm e fazem curvas de forma extremamente rápida.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 14. Bombaim (Bombay) -->
+            <div class="card-gato">
+                <img src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&q=80&w=600" alt="Gato Bombaim" class="foto-gato">
+                <div class="conteudo-gato">
+                    <h3>Bombaim</h3>
+                    <span class="tag-origem">Origem: Estados Unidos / Tailândia</span>
+                    <p class="descricao">Uma mini pantera negra! Pelos pretos curtíssimos e brilhantes como cetim, combinados com impressionantes olhos cor de cobre ou ouro.</p>
+                    <ul class="info-tecnica">
+                        <li><strong>Temperamento:</strong> Carente, caloroso e muito inteligente</li>
+                        <li><strong>Expectativa de Vida:</strong> 13 a 15 anos</li>
+                        <li><strong>Curiosidade:</strong> Quase todas as panterinhas pretas dessa raça adoram passear de coleira na rua.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 15. Vira-Lata (SDR) -->
+            <div class="card-gato">
+                <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&q=80&w=600" alt="Gato Sem Raça Definida" class="foto-gato">
+                <div class="conteudo-gato">
+                    <h3>Sem Raça Definida (SDR)</h3>
+                    <span class="tag-origem">Origem: Todo o mundo</span>
+                    <p class="descricao">Os reis das casas brasileiras! Mistura única de cores (frajolinhas, calicos, tigrados, laranjinhas). São os mais resistentes do mundo felino.</p>
+                    <ul class="info-tecnica">
+                        <li><strong>Temperamento:</strong> Imprevisível (de supercarinhoso a superindependente)</li>
+                        <li><strong>Expectativa de Vida:</strong> 15 a 22 anos (vivem muito!)</li>
+                        <li><strong>Curiosidade:</strong> Cada um tem uma personalidade e padrão de pelos 100% único no mundo.</li>
                     </ul>
                 </div>
             </div>
@@ -210,8 +400,23 @@
     </div>
 
     <footer>
-        <p>Criado com amor para todos os amantes de gatinhos do mundo 🐾</p>
+        <p>Desenvolvido com todo o amor felino do mundo! 🐾 Miauuu!</p>
     </footer>
 
+    <script>
+        function filtrarGatos() {
+            let input = document.getElementById('searchBar').value.toLowerCase();
+            let cards = document.getElementsByClassName('card-gato');
+
+            for (let i = 0; i < cards.length; i++) {
+                let nomeRaca = cards[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
+                if (nomeRaca.includes(input)) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+    </script>
 </body>
 </html>
